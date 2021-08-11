@@ -1,5 +1,5 @@
 ﻿# quote-calculator
-Quote Calculator application that calculate monthly payment, amortization schedule and history of records for those who apply a loan.
+Quote Calculator application that calculate monthly payment, list amortization schedule and see history of records for those who apply a loan.
 
 It also utilize the following technologies and patterns:
 
@@ -17,3 +17,6 @@ It also utilize the following technologies and patterns:
 
 ✔ CQRS (Command and Query Responsibility Segregation)
 
+✔ DI (Dependency Injection)
+
+✔ Lazy Load (Lazy Initialization)

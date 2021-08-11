@@ -19,3 +19,47 @@ var QuoteCalculator = {
         return ns;
     }
 };
+
+// Quote Page
+QuoteCalculator.namespace("Quote").Page = (function () {
+    var init = function () {
+        $("#calcQuote").on("click", function (event) {
+            $('form').attr('action', '/').submit();
+        });
+    };
+
+    return {
+        init: init,
+    };
+})();
+
+// Apply Loan Page
+QuoteCalculator.namespace("Apply").Page = (function () {
+    var init = function () {
+        $("#quoteComputation").addClass('d-none');
+        $("#viewComputation").text('View Computation');
+
+        $("#viewComputation").on("click", function (event) {
+            if ($("#quoteComputation").hasClass('d-none')) {
+                $("#quoteComputation").removeClass('d-none');
+                $(this).text('Hide Computation');
+            }
+            else {
+                $("#quoteComputation").addClass('d-none');
+                $(this).text('View Computation');
+            }
+        });
+
+        $("#applyLoan").on("click", function (event) {
+            $('form').attr('action', '/apply').submit();
+        });
+
+        $("#editDetails").on("click", function (event) {
+            $('form').attr('action', '/editquote').submit();
+        });
+    };
+
+    return {
+        init: init,
+    };
+})();
