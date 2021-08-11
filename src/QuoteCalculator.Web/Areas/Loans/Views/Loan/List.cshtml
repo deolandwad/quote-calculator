@@ -1,0 +1,54 @@
+﻿@model LoanListModel
+@{
+    ViewBag.Title = "Loans";
+}
+
+<div class="card card-body">
+    <h1>@ViewBag.Title</h1>
+
+    <div class="row pb-20">
+        <div class="col">
+
+            <table class="table table-sm table-hover table-list">
+                <tr>
+                    <th class="table-list-actions no-hover">
+                        <a class="btn btn-xs btn-light" href="/loans/edit">New Loan</a>
+                    </th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile number</th>
+                    <th>Loan Amount</th>
+                    <th>Interest Rate</th>
+                    <th>Terms</th>
+                    <th>Monthly Payment</th>
+                </tr>
+
+                @if (Model.Loans.Count() == 0)
+                {
+                    <tr><td colspan="5"><div class="no-items">No items to display</div></td></tr>
+                }
+
+                @foreach (var loan in Model.Loans)
+                {
+                    <tr>
+                        <td>
+                            <form method="post">
+                                <a class='btn btn-xs btn-light' href="/loans/edit/@loan.Id">Edit</a>
+                                <a class='btn btn-xs btn-light' onclick="$('form').attr('action', '/loans/delete/@loan.Id').submit();" href="javascript:void(0);">Delete</a>
+                            </form>
+                        </td>
+                        <td><a class="table-list-link" href="/loans/@loan.Id">@loan.FullName</a></td>
+                        <td>@loan.Email</td>
+                        <td>@loan.MobileNumber</td>
+                        <td>@loan.FinanceAmount</td>
+                        <td>@loan.InterestRate</td>
+                        <td>@loan.Terms</td>
+                        <td>@loan.RepaymentAmount</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</div>
+<br />
