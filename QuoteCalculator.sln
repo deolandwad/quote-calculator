@@ -5,13 +5,19 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuoteCalculator.Web", "src\QuoteCalculator.Web\QuoteCalculator.Web.csproj", "{46A33D0D-B393-4B52-AB49-C7E0CF3A48EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteCalculator.Data", "src\QuoteCalculator.Data\QuoteCalculator.Data.csproj", "{A89827D4-7AA8-43E3-A5B6-524C64D84032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuoteCalculator.Data", "src\QuoteCalculator.Data\QuoteCalculator.Data.csproj", "{A89827D4-7AA8-43E3-A5B6-524C64D84032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteCalculator.Domain", "src\QuoteCalculator.Domain\QuoteCalculator.Domain.csproj", "{99E91859-4000-4324-9B7D-C5AF0E9CA11A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuoteCalculator.Domain", "src\QuoteCalculator.Domain\QuoteCalculator.Domain.csproj", "{99E91859-4000-4324-9B7D-C5AF0E9CA11A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteCalculator.App", "src\QuoteCalculator.App\QuoteCalculator.App.csproj", "{E46CC8BE-CE67-4486-82C6-6524909F1170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuoteCalculator.App", "src\QuoteCalculator.App\QuoteCalculator.App.csproj", "{E46CC8BE-CE67-4486-82C6-6524909F1170}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D9C3DD8A-383D-4F4E-ACC8-5D117641CD20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA759473-C098-45A0-8F25-B9444B049914}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
