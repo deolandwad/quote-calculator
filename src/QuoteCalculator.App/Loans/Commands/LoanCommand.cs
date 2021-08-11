@@ -21,6 +21,7 @@ namespace QuoteCalculator.App.Loans.Commands
         {
             var loanManager = new LoanManager((double)model.FinanceAmount, (double)model.InterestRate, (int)model.Terms);
             model.RepaymentAmount = loanManager.RepaymentAmount;
+            model.TotalInterest = loanManager.TotalInterest;
 
             if (model.Id == 0) // New Loan
             {

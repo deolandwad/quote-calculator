@@ -12,5 +12,6 @@
         public double FinanceAmount { get; set; }
         public string FullName { get; set; }
         public double RepaymentAmount { get; set; }
+        public double TotalInterest { get; set; }
     }
 }

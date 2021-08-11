@@ -36,6 +36,8 @@ namespace QuoteCalculator.App.Quotes.Models
 
         public double RepaymentAmount { get; set; }
 
+        public double TotalInterest { get; set; }
+
         public string FullName { get { return FirstName + " " + LastName; } }
 
         public List<QuoteScheduleModel> QuoteSchedules { get; set; } = new List<QuoteScheduleModel>();

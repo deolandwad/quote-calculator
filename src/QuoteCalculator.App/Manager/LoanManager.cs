@@ -1,11 +1,6 @@
-﻿using Microsoft.VisualBasic;
-using QuoteCalculator.App.Quotes.Models;
+﻿using QuoteCalculator.App.Quotes.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuoteCalculator.App.Manager
 {
@@ -15,18 +10,22 @@ namespace QuoteCalculator.App.Manager
         private readonly double interest;
         private readonly int terms;
         private readonly int frequency;
-        private readonly double repaymentAmount;
+        private double repaymentAmount;
+        private double totalInterest;
 
         public LoanManager(double amount, double interest, int terms)
         {
-            this.frequency = 12; // Number of payment per year for monthly. TODO: Allow other frequency.
+            frequency = 12; // Number of payment per year for monthly. TODO: Allow other frequency.
             this.amount = amount;
             this.interest = interest / 100 / frequency;
             this.terms = terms;
-            this.repaymentAmount = ComputePayment(this.interest, this.terms, this.amount);
+
+            ComputePayment();
+            ComputeTotalInterest();
         }
 
         public double RepaymentAmount { get { return Math.Round(repaymentAmount, 2); } }
+        public double TotalInterest { get { return Math.Round(totalInterest, 2); } }
 
         public List<QuoteScheduleModel> GetSchedules()
         {
@@ -36,42 +35,53 @@ namespace QuoteCalculator.App.Manager
             for (int payNo = 1; payNo <= terms; payNo++)
             {
                 var quoteSchedule = new QuoteScheduleModel();
+
                 quoteSchedule.PaymentNo = payNo;
                 quoteSchedule.Payment = repaymentAmount;
-                quoteSchedule.Principal = ComputePrincipal(repaymentAmount, interest, balance);
-                quoteSchedule.Interest = ComputeInterest(interest, balance);
-                balance -= ComputePrincipal(repaymentAmount, interest, balance);
-
+                quoteSchedule.Principal = ComputePrincipal(balance);
+                quoteSchedule.Interest = ComputeInterest(balance);
+                balance -= ComputePrincipal(balance);
                 quoteSchedule.Balance = balance;
+
                 quoteSchedules.Add(quoteSchedule);
             }
 
             return quoteSchedules;
         }
 
-        private double ComputePayment(double interest, int terms, double amount)
+        private void ComputePayment()
         {
             // Amount * AnnualInterestRate / PaymentsPerYear *
             // (1 + AnnualInterestRate / PaymentsPerYear) ^ (Years * PaymentsPerYear) /
             // ((1 + AnnualInterestRate / PaymentsPerYear) ^ (Years * PaymentsPerYear) - 1)
 
-            double payment = amount * interest * Math.Pow((1.0 + interest), terms) / (Math.Pow((1.0 + interest), terms) - 1.0);
-
-            return payment;
+            repaymentAmount = amount * interest * Math.Pow((1.0 + interest), terms) / (Math.Pow((1.0 + interest), terms) - 1.0);
         }
 
-        private double ComputePrincipal(double payment, double interest, double amount)
+        private double ComputePrincipal(double balance)
         {
             // Principal = Payment - Interest
-            
-            return payment - ComputeInterest(interest, amount);
+
+            return repaymentAmount - ComputeInterest(balance);
         }
 
-        private double ComputeInterest(double interest, double amount)
+        private double ComputeInterest(double balance)
         {
             // Interest = (5%/12) x 20,000
 
-            return interest * amount;
+            return interest * balance;
         }
+
+        private void ComputeTotalInterest()
+        {
+            double balance = amount;
+
+            for (int payNo = 1; payNo <= terms; payNo++)
+            {
+                totalInterest += ComputeInterest(balance);
+                balance -= ComputePrincipal(balance);
+            }
+        }
+
     }
 }

@@ -15,6 +15,7 @@ namespace QuoteCalculator.App.Quotes.Queries
         {
             var loanManager = new LoanManager((double)model.FinanceAmount, (double)model.InterestRate, (int)model.Terms);
             model.RepaymentAmount = loanManager.RepaymentAmount;
+            model.TotalInterest = loanManager.TotalInterest;
             model.QuoteSchedules = loanManager.GetSchedules();
         }
     }

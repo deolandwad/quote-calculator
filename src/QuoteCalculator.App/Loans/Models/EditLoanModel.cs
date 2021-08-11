@@ -34,5 +34,7 @@ namespace QuoteCalculator.App.Loans.Models
         public double? FinanceAmount { get; set; }
 
         public double RepaymentAmount { get; set; }
+
+        public double TotalInterest { get; set; }
     }
 }

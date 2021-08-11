@@ -11,5 +11,6 @@
         public double InterestRate { get; set; }
         public double FinanceAmount { get; set; }
         public double RepaymentAmount { get; set; }
+        public double TotalInterest { get; set; }
     }
 }
