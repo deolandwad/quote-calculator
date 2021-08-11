@@ -1,0 +1,53 @@
+﻿@model LoanDetailModel
+@{
+    ViewBag.Title = "Loan Details";
+}
+
+<div class="card card-body">
+    <h1>@ViewBag.Title</h1>
+
+    <div class="row pb-80">
+        <div class="col-12 col-md-6">
+            <div class="form-group row">
+                <label for="FirstName" class="col-4 col-form-label">First Name</label>
+                <div class="col-8"><input type="text" asp-for="FirstName" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="LastName" class="col-4 col-form-label">Last Name</label>
+                <div class="col-8"><input type="text" asp-for="LastName" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="Email" class="col-4 col-form-label">Email</label>
+                <div class="col-8"><input type="text" asp-for="Email" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="MobileNumber" class="col-4 col-form-label">Mobile number</label>
+                <div class="col-8"><input type="text" asp-for="MobileNumber" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="FinanceAmount" class="col-4 col-form-label">Loan Amount</label>
+                <div class="col-8"><input type="number" asp-for="FinanceAmount" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="InterestRate" class="col-4 col-form-label">Interest Rate</label>
+                <div class="col-8"><input type="number" asp-for="InterestRate" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="Terms" class="col-4 col-form-label">Terms</label>
+                <div class="col-8"><input type="number" asp-for="Terms" readonly class="form-control-plaintext"></div>
+            </div>
+            <div class="form-group row">
+                <label for="RepaymentAmount" class="col-4 col-form-label">Monthly Payment</label>
+                <div class="col-8"><input type="number" asp-for="RepaymentAmount" readonly class="form-control-plaintext"></div>
+            </div>
+            <hr />
+            <div class="form-group row">
+                <label class="col-4 ">&nbsp;</label>
+                <div class="col-8 ">
+                    <a class="btn btn-light btn-sm" href="javascript:history.back();">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
