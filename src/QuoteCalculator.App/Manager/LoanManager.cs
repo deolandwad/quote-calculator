@@ -15,6 +15,10 @@ namespace QuoteCalculator.App.Manager
 
         public LoanManager(double amount, double interest, int terms)
         {
+            if (amount < 0) throw new ArgumentException($"{nameof(amount)} cannot be {amount}");
+            if (interest < 0) throw new ArgumentException($"{nameof(interest)} cannot be {interest}");
+            if (terms <= 0) throw new ArgumentException($"{nameof(terms)} cannot be {terms}");
+
             frequency = 12; // Number of payment per year for monthly. TODO: Allow other frequency.
             this.amount = amount;
             this.interest = interest / 100 / frequency;

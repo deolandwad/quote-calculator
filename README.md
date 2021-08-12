@@ -1,14 +1,22 @@
-﻿# quote-calculator
+﻿# Quote Calculator
 Quote Calculator application that calculate monthly payment, list amortization schedule and see history of records for those who apply a loan.
 
-It also utilize the following technologies and patterns:
+* Domain-centric Architecture
+* Unit Testing
+* Integration Testing
 
-# Technologies
+# Tools
+✔ C#
+
 ✔ ASP.NET Core MVC
 
 ✔ Entity Framework Core
 
 ✔ AutoMapper
+
+✔ xUnit
+
+✔ Moq
 
 # Patterns
 ✔ Repository

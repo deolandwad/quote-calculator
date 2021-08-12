@@ -1,7 +1,7 @@
 using QuoteCalculator.Domain;
 using Xunit;
 
-namespace QuoteCalculator.UnitTests.Domain
+namespace QuoteCalculator.Tests.Domain
 {
     public class LoanTests
     {
