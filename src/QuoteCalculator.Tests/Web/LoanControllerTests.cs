@@ -108,8 +108,9 @@ namespace QuoteCalculator.Tests.Web
         {
             var expectedCount = 2;
 
-            ViewResult viewResult = (ViewResult)sut.List(model);
-            var viewModel = (LoanListModel)viewResult.Model;
+            var actionResult = sut.List(model);
+            var viewResult = Assert.IsType<ViewResult>(actionResult);
+            var viewModel = Assert.IsType<LoanListModel>(viewResult.Model);
             var results = viewModel.Loans;
 
             mockLoanRepository.Verify(m => m.All(), Times.Once());
