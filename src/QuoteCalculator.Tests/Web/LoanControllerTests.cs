@@ -262,7 +262,7 @@ namespace QuoteCalculator.Tests.Web
             var actionResult = sut.Edit(editModel);
 
             Assert.Equal(Failure, sut.Failure);
-            mockLoanRepository.Verify(m => m.Add(It.IsAny<Loan>()), Times.Never());
+            mockLoanRepository.Verify(m => m.Update(It.IsAny<Loan>()), Times.Never());
             mockUnitOfWork.Verify(m => m.SaveChanges(), Times.Never());
         }
     }
