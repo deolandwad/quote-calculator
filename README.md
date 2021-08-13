@@ -10,6 +10,8 @@ Quote Calculator application that calculate monthly payment, list amortization s
 
 ✔ ASP.NET Core MVC
 
+✔ ASP.NET Core Web API
+
 ✔ Entity Framework Core
 
 ✔ AutoMapper
