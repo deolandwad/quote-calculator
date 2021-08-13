@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
+﻿using QuoteCalculator.App.Manager;
 using QuoteCalculator.App.Quotes.Models;
-using QuoteCalculator.Data;
-using QuoteCalculator.Domain;
-using QuoteCalculator.App.Manager;
 
 namespace QuoteCalculator.App.Quotes.Queries
 {
