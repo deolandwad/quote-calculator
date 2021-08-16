@@ -61,6 +61,8 @@ namespace QuoteCalculator.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuoteCalculator.Api v1"));
             }
 
+            app.UseStatusCodePages();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

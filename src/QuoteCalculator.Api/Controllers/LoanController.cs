@@ -70,7 +70,6 @@ namespace QuoteCalculator.Api.Controllers
             loanCommand.Execute(model);
 
             return NoContent();
-
         }
 
         // DELETE api/<LoanController>/5
