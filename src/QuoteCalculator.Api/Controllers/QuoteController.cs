@@ -22,29 +22,45 @@ namespace QuoteCalculator.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] QuoteDetailModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                quoteQuery.Execute(model);
+
+                if (model.isDuplicateLoan)
+                {
+                    ModelState.AddModelError("FirstName", "The provided name has existing loan.");
+                    ModelState.AddModelError("LastName", "The provided name has existing loan.");
+                }
+                else
+                {
+                    return Ok(model);
+                }
             }
 
-            quoteQuery.Execute(model);
-
-            return Ok(model);
+            return BadRequest(ModelState);
         }
 
         // PUT api/<QuoteController>/5
         [HttpPut("{quoteId}")]
         public IActionResult Put(int quoteId, [FromBody] QuoteDetailModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                model.Id = quoteId;
+                quoteQuery.Execute(model);
+
+                if (model.isDuplicateLoan)
+                {
+                    ModelState.AddModelError("FirstName", "The provided name has existing loan.");
+                    ModelState.AddModelError("LastName", "The provided name has existing loan.");
+                }
+                else
+                {
+                    return NoContent();
+                }
             }
 
-            model.Id = quoteId;
-            quoteCommand.Execute(model);
-
-            return NoContent();
+            return BadRequest(ModelState);
         }
     }
 }

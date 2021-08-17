@@ -1,16 +1,30 @@
-﻿using QuoteCalculator.App.Quotes.Models;
+﻿using Moq;
+using QuoteCalculator.App.Quotes.Models;
 using QuoteCalculator.App.Quotes.Queries;
+using QuoteCalculator.Data;
+using QuoteCalculator.Data.Repositories;
+using QuoteCalculator.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace QuoteCalculator.Tests.App.Quotes
 {
     public class QuoteQueryTests
     {
+        private Mock<IRepository<Loan>> mockLoanRepository;
+        private Mock<IUnitOfWork> mockUnitOfWork;
         private IQuoteQuery sut;
         private QuoteDetailModel model;
+        private List<Loan> loans;
 
+        private const int Id = 0;
+        private const string FirstName = "Cammy";
+        private const string LastName = "Albares";
+        private const string Email = "calbares@gmail.com";
+        private const string MobileNumber = "956-537-6195";
         private const int Terms = 120;
         private const double InterestRate = 5;
         private const double FinanceAmount = 20000;
@@ -21,12 +35,41 @@ namespace QuoteCalculator.Tests.App.Quotes
         {
             model = new QuoteDetailModel()
             {
+                Id = Id,
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email,
+                MobileNumber = MobileNumber,
                 Terms = Terms,
                 InterestRate = InterestRate,
                 FinanceAmount = FinanceAmount
             };
 
-            sut = new QuoteQuery();
+            loans = new List<Loan>()
+            {
+                new Loan()
+                {
+                    Id = 1,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    MobileNumber = MobileNumber,
+                    Terms = Terms,
+                    InterestRate = InterestRate,
+                    FinanceAmount = FinanceAmount,
+                    RepaymentAmount = RepaymentAmount,
+                    TotalInterest = TotalInterest
+                }
+            };
+
+            mockLoanRepository = new Mock<IRepository<Loan>>();
+            mockLoanRepository.Setup(m => m.Find(It.IsAny<Expression<Func<Loan, bool>>>()))
+                .Returns(new Func<Expression<Func<Loan, bool>>, IQueryable<Loan>>(expr => loans.Where(expr.Compile()).AsQueryable()));
+
+            mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(m => m.LoanRepository).Returns(mockLoanRepository.Object);
+
+            sut = new QuoteQuery(mockUnitOfWork.Object);
         }
 
         [Fact]
@@ -122,6 +165,27 @@ namespace QuoteCalculator.Tests.App.Quotes
             var ex = Assert.Throws<ArgumentException>(() => sut.Execute(model));
 
             Assert.Equal(amountException, ex.Message);
+        }
+
+        [Fact]
+        public void TestExecuteHasExistingLoan()
+        {
+            sut.Execute(model);
+
+            mockLoanRepository.Verify(m => m.Find(It.IsAny<Expression<Func<Loan, bool>>>()), Times.Once());
+            Assert.True(model.isDuplicateLoan);
+        }
+
+        [Fact]
+        public void TestExecuteHasNoExistingLoan()
+        {
+            model.FirstName = "Roxane";
+            model.LastName = "Campain";
+
+            sut.Execute(model);
+
+            mockLoanRepository.Verify(m => m.Find(It.IsAny<Expression<Func<Loan, bool>>>()), Times.Once());
+            Assert.False(model.isDuplicateLoan);
         }
     }
 }

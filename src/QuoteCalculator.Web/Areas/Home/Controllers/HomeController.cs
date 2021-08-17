@@ -31,7 +31,16 @@ namespace QuoteCalculator.Web.Areas.Home.Controllers
             if (ModelState.IsValid)
             {
                 quoteQuery.Execute(model);
-                return View("Apply", model);
+
+                if (model.isDuplicateLoan)
+                {
+                    ModelState.AddModelError("FirstName", "The provided name has existing loan.");
+                    ModelState.AddModelError("LastName", "The provided name has existing loan.");
+                }
+                else
+                {
+                    return View("Apply", model);
+                }
             }
 
             Failure = "Unable to validate quote. Please try again.";
