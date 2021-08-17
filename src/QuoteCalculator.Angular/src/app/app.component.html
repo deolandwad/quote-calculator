@@ -1,0 +1,21 @@
+<div class="main-menu">
+  <div class="container d-flex">
+    <div>
+      <a class="navbar-brand">{{pageTitle}}</a>
+      <ul class="nav nav-menu">
+        <li class='nav-item active'><a class="nav-link" [routerLink]="['/']">QUOTE</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="container">
+  <hr />
+  <p>
+    &copy; {{copyrightYear}} - {{pageTitle}}.
+  </p>
+</footer>

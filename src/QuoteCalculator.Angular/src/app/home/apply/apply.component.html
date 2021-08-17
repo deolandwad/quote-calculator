@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-md-9 mx-auto">
+    <div class="card card-body text-center">
+      <h1 class="heading display-5 pb-3">Your quote</h1>
+      <form autocomplete="off">
+        <input type="hidden" [value]="model.id" name="id">
+        <input type="hidden" [value]="model.firstName" name="firstName">
+        <input type="hidden" [value]="model.lastName" name="lastName">
+        <input type="hidden" [value]="model.interestRate" name="interestRate">
+        <input type="hidden" [value]="model.totalInterest" name="totalInterest">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Name</span>
+            </div>
+            <input type="text" class="form-control" [value]="model.fullName" name="fullName" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Mobile</span>
+            </div>
+            <input type="text" class="form-control" [value]="model.mobileNumber" name="mobileNumber" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Email</span>
+            </div>
+            <input type="text" class="form-control" [value]="model.email" name="email" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Finance amount</span>
+            </div>
+            <input type="text" class="form-control" [value]="model.financeAmount" name="financeAmount" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Terms</span>
+            </div>
+            <input type="text" class="form-control" [value]="model.terms" name="terms" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Repayments from</span>
+            </div>
+            <input type="text" class="form-control" [value]="model.repaymentAmount" name="repaymentAmount" readonly>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <a id="applyLoan" class="btn btn-dark btn-block" (click)='onApplyLoan()'>Apply now</a>
+          </div>
+          <div class="form-group col-md-4">
+            <a id="editDetails" class="btn btn-light btn-block" (click)='onEditQuote()'>Edit Details</a>
+          </div>
+          <div class="form-group col-md-4">
+            <a id="viewComputation" class="btn btn-light btn-block" (click)='onToggleComputation()'> {{(showComputation) ? 'Hide Computation' : 'Show Computation'}}</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="quoteComputation" class="row" *ngIf='showComputation'>
+  <div class="col-md-9 mx-auto">
+    <div class="card card-body text-center">
+      <h1 class="heading display-5 pb-3">Computation</h1>
+      <div class="row pb-20">
+        <div class="col">
+          <table class="table table-sm table-hover table-list" *ngIf='model.quoteSchedules?.length'>
+            <tr>
+              <th>Payment No.</th>
+              <th>Payment</th>
+              <th data-formatter="NumFormatter">Principal</th>
+              <th>Interest</th>
+              <th>Balance</th>
+            </tr>
+            <tr *ngFor='let quoteSchedule of model.quoteSchedules'>
+              <td>{{quoteSchedule.paymentNo}}</td>
+              <td>{{quoteSchedule.payment | currency:'USD':'symbol':'1.2-2'}}</td>
+              <td>{{quoteSchedule.principal | currency:'USD':'symbol':'1.2-2'}}</td>
+              <td>{{quoteSchedule.interest | currency:'USD':'symbol':'1.2-2'}}</td>
+              <td>{{quoteSchedule.balance | currency:'USD':'symbol':'1.2-2'}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />

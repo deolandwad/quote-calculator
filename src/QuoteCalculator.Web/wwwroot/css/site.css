@@ -29,6 +29,16 @@ footer {
     margin-bottom: 10px;
 }
 
+.navbar-brand {
+    color: white;
+    font-size: 30px;
+}
+
+    .navbar-brand:hover {
+        color: white;
+        text-decoration: none;
+    }
+
 .nav-menu {
     margin-top: 0;
 }

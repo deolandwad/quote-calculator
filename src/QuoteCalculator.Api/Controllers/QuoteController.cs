@@ -18,9 +18,9 @@ namespace QuoteCalculator.Api.Controllers
             this.quoteQuery = quoteQuery;
         }
 
-        // GET api/<QuoteController>
-        [HttpGet]
-        public IActionResult Get([FromBody] QuoteDetailModel model)
+        // POST api/<QuoteController>
+        [HttpPost]
+        public IActionResult Post([FromBody] QuoteDetailModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -32,15 +32,16 @@ namespace QuoteCalculator.Api.Controllers
             return Ok(model);
         }
 
-        // POST api/<QuoteController>
-        [HttpPost]
-        public IActionResult Post([FromBody] QuoteDetailModel model)
+        // PUT api/<QuoteController>/5
+        [HttpPut("{quoteId}")]
+        public IActionResult Put(int quoteId, [FromBody] QuoteDetailModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            model.Id = quoteId;
             quoteCommand.Execute(model);
 
             return NoContent();

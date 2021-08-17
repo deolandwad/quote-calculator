@@ -20,6 +20,8 @@ Quote Calculator application that calculate monthly payment, list amortization s
 
 ✔ Moq
 
+✔ Angular
+
 # Patterns
 ✔ Repository
 
