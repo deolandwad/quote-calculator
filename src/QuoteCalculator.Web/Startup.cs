@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,11 +12,8 @@ using QuoteCalculator.App.Quotes.Queries;
 using QuoteCalculator.Data;
 using QuoteCalculator.Data.Repositories;
 using QuoteCalculator.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using QuoteCalculator.Web.Data;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace QuoteCalculator.Web
 {
@@ -45,6 +41,8 @@ namespace QuoteCalculator.Web
             services.AddScoped<IQuoteQuery, QuoteQuery>();
             services.AddScoped<ILoanCommand, LoanCommand>();
             services.AddScoped<ILoanQuery, LoanQuery>();
+
+            services.AddTransient<QuoteCalculatorSeeder>();
 
             services.AddAutoMapper(typeof(MappingProfile).GetTypeInfo().Assembly);
 
@@ -74,9 +72,6 @@ namespace QuoteCalculator.Web
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
         }

@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuoteCalculator.Data;
 
 namespace QuoteCalculator.Data.Migrations
 {
     [DbContext(typeof(QuoteCalculatorContext))]
-    partial class QuoteCalculatorContextModelSnapshot : ModelSnapshot
+    [Migration("20210817131559_AddConstraint")]
+    partial class AddConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
