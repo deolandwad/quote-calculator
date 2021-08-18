@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace QuoteCalculator.Data.Repositories
+namespace QuoteCalculator.Domain
 {
     public interface IRepository<T>
     {

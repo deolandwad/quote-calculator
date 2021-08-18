@@ -3,12 +3,6 @@ using QuoteCalculator.Domain;
 
 namespace QuoteCalculator.Data
 {
-    public interface IUnitOfWork
-    {
-        IRepository<Loan> LoanRepository { get; }
-        void SaveChanges();
-    }
-
     public class QuoteCalculatorUnitOfWork : IUnitOfWork
     {
         private QuoteCalculatorContext context;
