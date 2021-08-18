@@ -44,23 +44,15 @@ namespace QuoteCalculator.Api.Controllers
         [HttpPut("{quoteId}")]
         public IActionResult Put(int quoteId, [FromBody] QuoteDetailModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                model.Id = quoteId;
-                quoteQuery.Execute(model);
-
-                if (model.isDuplicateLoan)
-                {
-                    ModelState.AddModelError("FirstName", "The provided name has existing loan.");
-                    ModelState.AddModelError("LastName", "The provided name has existing loan.");
-                }
-                else
-                {
-                    return NoContent();
-                }
+                return BadRequest(ModelState);
             }
 
-            return BadRequest(ModelState);
+            model.Id = quoteId;
+            quoteCommand.Execute(model);
+
+            return NoContent();
         }
     }
 }
